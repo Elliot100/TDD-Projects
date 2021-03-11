@@ -20,5 +20,12 @@ class Array
 
     def my_transpose
         arr = Array.new(self.length) {Array.new(self.length)}
+
+        (0..self.length-1).each do |i|
+            (0..self.length-1).each do |j|
+                arr[j][i] = self[i][j]
+            end
+        end
+        arr
     end 
 end

@@ -22,7 +22,7 @@ describe Array do
             [3, 4, 5],
             [6, 7, 8]
             ] }
-        it 'convert rows and cols or square matrix' do
+        it 'convert rows and cols of square matrix' do
             expect(a.my_transpose).to eq([[0, 3, 6],
                                         [1, 4, 7],
                                         [2, 5, 8]])
