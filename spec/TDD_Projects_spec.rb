@@ -29,3 +29,21 @@ describe Array do
         end
     end
 end
+
+describe Towers do
+    describe '#initialize' do
+        subject(:tower) {Towers.new}
+
+        it 'sets 3 arrays, arr1 with placement disks' do
+            expect(tower.arr1).to eq([5,4,3,2,1])
+        end
+
+        it 'sets arr2, arr3 to be empty array' do
+            expect(tower.arr2).to be_empty
+            expect(tower.arr3).to be_empty
+        end
+    end
+
+    
+
+end

@@ -29,3 +29,28 @@ class Array
         arr
     end 
 end
+
+class Towers
+    attr_reader :arr1, :arr2, :arr3
+
+    def initialize
+        @arr1 = [5,4,3,2,1]
+        @arr2 = []
+        @arr3 = []
+    end
+
+    def play
+        display
+        p "please select a pile to pick up and pile to move to. (e.q: 1,2) "
+        user_input = gets.chomp
+        pick,place = user_input.split(",")
+        pick,place = pick.to_i, place.to_i
+        
+    end
+
+    def display
+        p @arr1 
+        p @arr2 
+        p @arr3 
+    end
+end
