@@ -31,19 +31,44 @@ describe Array do
 end
 
 describe Towers do
+    subject(:tower) {Towers.new}
     describe '#initialize' do
-        subject(:tower) {Towers.new}
-
-        it 'sets 3 arrays, arr1 with placement disks' do
-            expect(tower.arr1).to eq([5,4,3,2,1])
+        it 'sets 3 arrays, arr[0] with placement disks' do
+            expect(tower.arr[0]).to eq([5,4,3,2,1])
         end
 
-        it 'sets arr2, arr3 to be empty array' do
-            expect(tower.arr2).to be_empty
-            expect(tower.arr3).to be_empty
+        it 'sets arr[1], arr[2] to be empty array' do
+            expect(tower.arr[1]).to be_empty
+            expect(tower.arr[2]).to be_empty
         end
     end
 
-    
+    describe '#move' do
+        it 'move the disk from select pile to placement pile' do
+            from_pile = 0
+            to_pile = 1
+            tower.move(from_pile, to_pile)
+            expect(tower.arr[from_pile]).to eq([5,4,3,2])
+            expect(tower.arr[to_pile]).to eq([1])
+        end
+    end
 
-end
+    describe '#valid_move' do
+        it 'returns false if disk > last item at pile' do 
+            tower.move(0, 2)
+            expect(tower.valid_move?(5, 2)).to eq(false)
+        end
+    end
+
+    describe '#won?' do
+        let(:tower) { Towers.new }
+
+        it 'returns true if last pile has all the disks in right order' do
+            tower.arr[2] = [5,4,3,2,1]
+            expect(tower.won?).to eq(true)
+        end
+    end
+
+
+        
+ end

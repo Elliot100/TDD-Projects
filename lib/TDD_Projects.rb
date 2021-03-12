@@ -31,26 +31,66 @@ class Array
 end
 
 class Towers
-    attr_reader :arr1, :arr2, :arr3
+    attr_reader :arr
 
     def initialize
-        @arr1 = [5,4,3,2,1]
-        @arr2 = []
-        @arr3 = []
+        @arr = [[5,4,3,2,1],[],[]]
     end
 
     def play
-        display
+        until won?
+            display
+            where_to_pick, where_to_place = get_input
+            move(where_to_pick, where_to_place)
+        end   
+        p "YAY YOU WON!"   
+    end
+
+    def won?
+        return true if @arr[2].length == 5
+        false
+    end
+
+    def move(where_to_pick, where_to_place)
+        disk = pick_disk(where_to_pick)
+        if valid_move?(disk,where_to_place) 
+            place_disk(where_to_place,disk)
+        else
+            invalid_move_message
+        end
+    end
+
+    def valid_move?(disk,where_to_place)
+        unless @arr[where_to_place].empty?
+            return false if @arr[where_to_place].last < disk
+        end
+        true
+    end
+
+    protected
+
+    def invalid_move_message
+        p "Sorry, that's an invalid move."
+    end
+
+    def place_disk(to, disk)
+        @arr[to].push(disk)
+    end
+
+    def pick_disk(pile)
+        @arr[pile].pop
+    end
+
+    def get_input
         p "please select a pile to pick up and pile to move to. (e.q: 1,2) "
         user_input = gets.chomp
         pick,place = user_input.split(",")
-        pick,place = pick.to_i, place.to_i
-        
+        [pick.to_i, place.to_i]
     end
 
     def display
-        p @arr1 
-        p @arr2 
-        p @arr3 
+        p @arr[0] 
+        p @arr[1]
+        p @arr[2]
     end
 end
